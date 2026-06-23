@@ -1,22 +1,20 @@
-importar { Terminal } desde '@es-js/terminal'
+importar { Terminal } desde "@es-js/terminal"
+importar {validarSecreto} desde 'https://desarrollo-aplicaciones.vercel.app/2024/code/validar-secreto.js';
+importar {obtenerJson} desde 'https://desarrollo-aplicaciones.vercel.app/2024/code/obtener-json.js';
 
-asincrono funcion inicio() {
-	Terminal.limpiar()
 
-	Terminal.escribir('Ingresa un valor:')
+const dni = '32165734';
 
-	const resultado = esperar Terminal.leer()
+Terminal.escribir('Hola, ingrese su  palabra secreta: ');
+const palabraSecreta = esperar Terminal.leer();
 
-	Terminal.escribir({
-		Resultado: resultado,
-		Tipo: tipoDe resultado,
-	})
-
-	Terminal.escribir('Presiona ENTER para volver a iniciar')
-
-	esperar Terminal.leerEnter()
-
-	esperar inicio()
+si (esperar validarSecreto(dni, palabraSecreta)) {
+    const dolarBlue = esperar obtenerJson('https://dolarapi.com/v1/dolares/blue');
+    
+    Terminal.escribir("Cotizacion del Dolar Blue:")  
+    Terminal.escribir("Valor del dolar para  la compra: $ "+ dolarBlue.compra);
+    Terminal.escribir("Valor del dolar para la venta: $ " + dolarBlue.venta);
+    
+} sino {
+    Terminal.escribir('La Palabra Secreta es incorrecta');
 }
-
-inicio()
